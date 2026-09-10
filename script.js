@@ -1,16 +1,49 @@
-//animação de loade de site 
+// TEMA CLARO / ESCURO                        //
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle.querySelector('i');
+
+// Função para aplicar o tema
+function applyTheme(theme) {
+    if (theme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.className = 'fas fa-sun';
+    } else {
+        document.body.classList.remove('dark-mode');
+        themeIcon.className = 'fas fa-moon';
+    }
+}
+
+// Carrega o tema salvo no navegador
+const savedTheme = localStorage.getItem('theme');
+
+if (savedTheme) {
+    applyTheme(savedTheme);
+} else {
+    // Se não houver tema salvo, verifica a preferência do sistema
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark ? 'dark' : 'light');
+}
+
+// Alterna o tema ao clicar no botão
+themeToggle.addEventListener('click', function() {
+    const isDark = document.body.classList.contains('dark-mode');
+    const newTheme = isDark ? 'light' : 'dark';
+    applyTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+});
+
+// ANIMAÇÃO DE LOADER                         //
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Esconde o loader após 1.5 segundos
     setTimeout(function() {
         const loader = document.getElementById('loader');
         loader.classList.add('hidden');
     }, 1500);
 });
 
-// ========================================== //
+
 // MENU MOBILE                                //
-// ========================================== //
+
 
 const menuToggle = document.getElementById('menuToggle');
 const nav = document.querySelector('nav');
@@ -18,7 +51,6 @@ const nav = document.querySelector('nav');
 menuToggle.addEventListener('click', function() {
     nav.classList.toggle('open');
     
-    // Troca o ícone do menu
     const icon = menuToggle.querySelector('i');
     if (nav.classList.contains('open')) {
         icon.className = 'fas fa-times';
@@ -27,7 +59,6 @@ menuToggle.addEventListener('click', function() {
     }
 });
 
-// Fecha o menu ao clicar em um link
 document.querySelectorAll('nav ul li a').forEach(link => {
     link.addEventListener('click', function() {
         nav.classList.remove('open');
@@ -35,9 +66,8 @@ document.querySelectorAll('nav ul li a').forEach(link => {
     });
 });
 
-// ========================================== //
 // SCROLL SUAVE PARA LINKS                    //
-// ========================================== //
+
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -59,9 +89,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ========================================== //
+
 // HEADER FIXO COM SOMBRA                     //
-// ========================================== //
+
 
 const header = document.getElementById('header');
 let lastScroll = 0;
@@ -69,14 +99,12 @@ let lastScroll = 0;
 window.addEventListener('scroll', function() {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Adiciona sombra quando rolar
     if (currentScroll > 50) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
     }
     
-    // Esconde/mostra header ao rolar (efeito app)
     if (currentScroll > lastScroll && currentScroll > 100) {
         header.style.transform = 'translateY(-100%)';
     } else {
@@ -86,9 +114,9 @@ window.addEventListener('scroll', function() {
     lastScroll = currentScroll;
 });
 
-// ========================================== //
+
 // BOTÃO VOLTAR AO TOPO                       //
-// ========================================== //
+
 
 const backToTop = document.getElementById('backToTop');
 
@@ -107,9 +135,9 @@ backToTop.addEventListener('click', function() {
     });
 });
 
-// ========================================== //
+
 // ANIMAÇÃO DOS CARDS AO SCROLL               //
-// ========================================== //
+
 
 const cards = document.querySelectorAll('.card');
 
@@ -131,9 +159,9 @@ cards.forEach(card => {
     cardObserver.observe(card);
 });
 
-// ========================================== //
+
 // ANIMAÇÃO DOS NÚMEROS (ESTATÍSTICAS)       //
-// ========================================== //
+
 
 const statNumbers = document.querySelectorAll('.stat-number');
 
@@ -170,9 +198,9 @@ statNumbers.forEach(stat => {
     statObserver.observe(stat);
 });
 
-// ========================================== //
+
 // DESTAQUE DO LINK ATIVO NO MENU            //
-// ========================================== //
+
 
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('nav ul li a');
@@ -195,75 +223,7 @@ window.addEventListener('scroll', function() {
     });
 });
 
-// ========================================== //
-// VALIDAÇÃO DO FORMULÁRIO                    //
-// ========================================== //
-
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const nome = document.getElementById('nome_contato').value.trim();
-    const email = document.getElementById('email_contato').value.trim();
-    const assunto = document.getElementById('assunto_contato').value;
-    const mensagem = document.getElementById('mensagem_contato').value.trim();
-    
-    // Validação simples
-    if (nome === '') {
-        alert('⚠️ Por favor, preencha o campo Nome.');
-        document.getElementById('nome_contato').focus();
-        return;
-    }
-    
-    if (email === '') {
-        alert('⚠️ Por favor, preencha o campo E-mail.');
-        document.getElementById('email_contato').focus();
-        return;
-    }
-    
-    if (!email.includes('@') || !email.includes('.')) {
-        alert('⚠️ Por favor, insira um e-mail válido.');
-        document.getElementById('email_contato').focus();
-        return;
-    }
-    
-    if (assunto === '') {
-        alert('⚠️ Por favor, selecione um assunto.');
-        document.getElementById('assunto_contato').focus();
-        return;
-    }
-    
-    if (mensagem === '') {
-        alert('⚠️ Por favor, preencha a mensagem.');
-        document.getElementById('mensagem_contato').focus();
-        return;
-    }
-    
-    // Mensagem de sucesso (simulação de envio)
-    const btn = contactForm.querySelector('.btn-primary');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-    btn.disabled = true;
-    
-    setTimeout(function() {
-        btn.innerHTML = '<i class="fas fa-check"></i> Mensagem enviada!';
-        btn.style.background = '#48bb78';
-        
-        // Reseta o formulário após 2 segundos
-        setTimeout(function() {
-            contactForm.reset();
-            btn.innerHTML = originalText;
-            btn.style.background = '';
-            btn.disabled = false;
-            alert('✅ Mensagem enviada com sucesso!');
-        }, 2000);
-    }, 2000);
-});
-
-// ========================================== //
 // EFEITO PARALAX NO BANNER                   //
-// ========================================== //
 
 window.addEventListener('scroll', function() {
     const banner = document.querySelector('.banner');
@@ -274,11 +234,9 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// ========================================== //
-// ANIMAÇÃO DE ENTRADA DOS CARDS FLUTUANTES   //
-// ========================================== //
+// EFEITO DE DIGITAÇÃO NO TÍTULO              //
 
-// Pequeno efeito de digitação no título do banner
+
 const bannerTitle = document.querySelector('.banner-text h2 .highlight');
 if (bannerTitle) {
     const text = bannerTitle.textContent;
@@ -293,9 +251,7 @@ if (bannerTitle) {
         }
     }
     
-    // Inicia a animação após o loader
     setTimeout(typeWriter, 2000);
 }
 
-console.log('  ProgLing - Site carregado com sucesso!');
-console.log('💻 Desenvolvido com ☕ para aprendizado de programação.');
+console.log('LingProg - Site carregado com sucesso!');
