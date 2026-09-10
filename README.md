@@ -21,8 +21,6 @@ O **LingProg** é uma plataforma web informativa dedicada a reunir conteúdos so
 
 ## Acesse o Site
 
-O projeto está publicado e pode ser acessado através do link abaixo:
-
 **[https://dheferson-santos.github.io/LingProg/](https://dheferson-santos.github.io/LingProg/)**
 
 ---
