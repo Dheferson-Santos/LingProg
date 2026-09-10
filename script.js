@@ -254,4 +254,8 @@ if (bannerTitle) {
     setTimeout(typeWriter, 2000);
 }
 
+<<<<<<< HEAD
 console.log('LingProg - Site carregado com sucesso!');
+=======
+console.log('LingProg - Site carregado com sucesso!');
+>>>>>>> a400fe38beba7dba6b90a51a71708838b2ef612c
