@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pagina python</title>
+    <link rel="stylesheet" href="site.html">
+</head>
+<body>
+                                                                                                                                                                                                                                                    
+   <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="fa-3x">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <h2>Python</h2>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <!--cabeçalho-->
+    <header id="header"
+    <div class="container">
+
+    <!---logo  com imagem do lado icone -->
+    </div>
+
+    
+</body>
+</html>
